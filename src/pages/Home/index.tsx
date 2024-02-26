@@ -1,5 +1,10 @@
+import logoHome from '../../assets/HomeLogo.svg';
+
 export function Home() {
   return (
-    <h1>Home</h1>
+    <>
+      <img src={logoHome} alt=""></img>
+      <h1>Nossos cafés</h1>
+    </>
   )
 }
