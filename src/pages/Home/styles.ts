@@ -25,16 +25,20 @@ export const InfoContainer = styled.div`
 `
 
 export const SubTitlesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 20px;
   margin-top: 1rem;
-  width: 100%;
 
-  span {
-    width: 48%; /* Defina a largura desejada para cada item */
-    margin-bottom: 10px; /* Espaçamento entre os itens */
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    svg {
+      padding: 6px;
+      border-radius: 999px;
+    }
   }
 
 `
