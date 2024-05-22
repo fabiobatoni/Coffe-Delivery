@@ -1,19 +1,24 @@
 import {Hero} from "./components/Hero"
+import {
+  CoffeeContainer,
+  OurCoffeesContainer,
+  HomeContainer
+} from './styles'
 
 export function Home() {
 
   return (
-    <>
+    <HomeContainer>
       <Hero />
 
-      <div>
+      <CoffeeContainer>
         <h2>Nossos cafés</h2>
 
-        <div>
-          Card
-        </div>
-      </div>
+        <OurCoffeesContainer>
+          
+        </OurCoffeesContainer>
+      </CoffeeContainer>
 
-    </>
+    </HomeContainer>
   )
 }
