@@ -1,3 +1,5 @@
+import { coffees } from "../../mock/coffee"
+import { CoffeeCard } from "./components/Card"
 import {Hero} from "./components/Hero"
 import {
   CoffeeContainer,
@@ -15,7 +17,9 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <OurCoffeesContainer>
-          
+          {coffees.map((coffee) => (
+            <CoffeeCard coffeeDetails={coffee} key={coffee.id} />
+          ))}
         </OurCoffeesContainer>
       </CoffeeContainer>
 

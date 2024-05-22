@@ -14,6 +14,7 @@ export const CoffeeContainer = styled.div`
 `
 
 export const OurCoffeesContainer = styled.div`
+  margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 40px 20px;

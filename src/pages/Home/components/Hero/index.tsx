@@ -1,5 +1,5 @@
 import { Coffee, Package, ShoppingCartSimple, Timer } from 'phosphor-react';
-import logoHome from '../../../assets/HomeLogo.svg';
+import logoHome from '../../../../assets/HomeLogo.svg';
 import { HomeContainer, InfoContainer, SubTitlesContainer } from './styles';
 import { useTheme } from 'styled-components';
 
