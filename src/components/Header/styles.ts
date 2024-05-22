@@ -37,10 +37,8 @@ export const HeaderContainer = styled.header`
             font-weight: bold;
             color: ${(props) => props.theme["purple-dark"]};
             background: ${(props) => props.theme["purple-light"]};
-
-            &:hover {
-              background: ${(props) => props.theme["purple"]};
-            }
+            border: none;
+            outline: none;
         }
     }
 `
