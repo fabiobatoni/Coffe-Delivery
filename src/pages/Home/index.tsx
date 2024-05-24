@@ -1,5 +1,6 @@
+import { useState } from "react"
 import { coffees } from "../../mock/coffee"
-import { CoffeeCard } from "./components/Card"
+import { CoffeeCard, CoffeeDetails } from "./components/Card"
 import {Hero} from "./components/Hero"
 import {
   CoffeeContainer,
@@ -7,7 +8,19 @@ import {
   HomeContainer
 } from './styles'
 
+export interface coffeeDetails {
+  id: number
+  tags: string[]
+  title: string
+  description: string
+  image: string
+  price: number
+  quantity: number
+}
+
 export function Home() {
+
+  const [coffeesOnCart, setCoffesOnCart] = useState<CoffeeDetails[]>([]) 
 
   return (
     <HomeContainer>
@@ -18,7 +31,11 @@ export function Home() {
 
         <OurCoffeesContainer>
           {coffees.map((coffee) => (
-            <CoffeeCard coffeeDetails={coffee} key={coffee.id} />
+            <CoffeeCard 
+             coffeesOnCart={coffeesOnCart}
+             setCoffesOnCart={setCoffesOnCart}
+             coffeeDetails={coffee} 
+             key={coffee.id} />
           ))}
         </OurCoffeesContainer>
       </CoffeeContainer>

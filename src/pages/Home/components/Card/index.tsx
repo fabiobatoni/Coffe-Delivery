@@ -8,6 +8,8 @@ import {
 } from './styles'
 
 import { Link } from 'react-router-dom'
+import { coffeeDetails } from '../..'
+import { useEffect, useState } from 'react'
 
 export interface CoffeeDetails {
   id: number
@@ -21,10 +23,40 @@ export interface CoffeeDetails {
 
 interface CoffeeCardProps {
   coffeeDetails: CoffeeDetails
+
+  coffeesOnCart: CoffeeDetails[]
+  setCoffesOnCart: (coffee: ((state: coffeeDetails[]) => coffeeDetails[])) => void
 }
 
-export function CoffeeCard({ coffeeDetails }: CoffeeCardProps) {
+export function CoffeeCard({ coffeeDetails, coffeesOnCart, setCoffesOnCart }: CoffeeCardProps) {
   const { description, image, price, tags, title, id } = coffeeDetails
+
+  const [quantity, setQuantity] = useState(0)
+
+  function addCoffeeToCart(coffeeDetails: CoffeeDetails) {
+    const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === coffeeDetails.id)
+
+    if(currentCoffeIndex >= 0) {
+      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffeeDetails, quantity: coffee.quantity + 1 } : coffee))
+    } else {
+      setCoffesOnCart(state => [...state, {...coffeeDetails, quantity: 1}])
+    }
+
+  }
+
+  function reduceCoffeFromCart(id: number) {
+    const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === id)
+
+    if(currentCoffeIndex >= 0) {
+      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffeeDetails, quantity: coffee.quantity - 1 } : coffee).filter((coffee) => coffee.quantity >= 0))
+    }
+  }
+
+  useEffect(() => {
+    const currentCoffe = coffeesOnCart.find((coffee) => coffee.id === id)
+
+    setQuantity(currentCoffe ? currentCoffe.quantity : 0)
+  }, [id, coffeesOnCart])
 
   return (
     <CoffeeOptionContainer>
@@ -49,11 +81,11 @@ export function CoffeeCard({ coffeeDetails }: CoffeeCardProps) {
             <p>{price}</p>
           </div>
           <div className="quantity">
-            <button type="button" aria-label="Diminuir quantidade">
+            <button onClick={() => reduceCoffeFromCart(id)} type="button" aria-label="Diminuir quantidade">
               <Minus size={16} />
             </button>
-            <span>{0}</span>
-            <button type="button" aria-label="Aumentar quantidade">
+            <span>{quantity}</span>
+            <button onClick={() => addCoffeeToCart(coffeeDetails)} type="button" aria-label="Aumentar quantidade">
               <Plus size={16} />
             </button>
           </div>
