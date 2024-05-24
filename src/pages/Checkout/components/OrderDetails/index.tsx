@@ -12,44 +12,49 @@ import {
   OrderInfosContainer,
   ConfirmContainer,
 } from './styles'
+import { useContext } from 'react'
+import { CartContext } from '../../../../context/CartContext'
 
 
 export function OrderDetails() {
   const theme = useTheme()
 
+  const { addCoffeeToCart, reduceCoffeFromCart, coffeesOnCart } = useContext(CartContext)
+
   return (
     <OrderInfosContainer>
-      <CoffeeCardContainer>
-        <CoffeeCardDetails>
-          <div className="coffee-box">
-            <img src={`coffees/traditional-express.png`} alt="" />
-            <div className="details">
-              <p>Expresso Tradicional</p>
-              <div className="actions">
-                <AddOrRemoveItem>
-                  <button type="button" aria-label="Diminuir quantidade">
-                    <Minus size={14} color={theme?.purple} />
-                  </button>{' '}
-                  2
-                  <button type="button" aria-label="Aumentar quantidade">
-                    <Plus size={14} color={theme?.purple} />
-                  </button>
-                </AddOrRemoveItem>
-                <RemoveItem>
-                  <Trash size={14} color={theme?.purple} /> remover
-                </RemoveItem>
+      {coffeesOnCart.map(coffee => (
+          <CoffeeCardContainer key={coffee.id}>
+          <CoffeeCardDetails>
+            <div className="coffee-box">
+              <img src={`coffees/${coffee.image}`} alt="" />
+              <div className="details">
+                <p>{coffee.title}</p>
+                <div className="actions">
+                  <AddOrRemoveItem>
+                    <button onClick={() => reduceCoffeFromCart(coffee.id)} type="button" aria-label="Diminuir quantidade">
+                      <Minus size={14} color={theme?.purple} />
+                    </button>{' '}
+                    {coffee.quantity}
+                    <button onClick={() => addCoffeeToCart(coffee)} type="button" aria-label="Aumentar quantidade">
+                      <Plus size={14} color={theme?.purple} />
+                    </button>
+                  </AddOrRemoveItem>
+                  <RemoveItem>
+                    <Trash size={14} color={theme?.purple} /> remover
+                  </RemoveItem>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="price">
-            <p>R$ 12.99</p>
-          </div>
-        </CoffeeCardDetails>
+            <div className="price">
+              <p>{coffee.price}</p>
+            </div>
+          </CoffeeCardDetails>
 
-        <Divider />
-      </CoffeeCardContainer>
-
+          <Divider />
+        </CoffeeCardContainer>
+      ))}
       <ConfirmContainer>
         <ValuesDetails>
           <div>
