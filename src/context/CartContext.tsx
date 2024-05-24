@@ -44,7 +44,7 @@ export function CartContextProvider({ children } : CartContextProviderProps) {
     const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === id)
 
     if(currentCoffeIndex >= 0) {
-      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffee, quantity: coffee.quantity - 1 } : coffee).filter((coffee) => coffee.quantity >= 0))
+      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffee, quantity: coffee.quantity - 1 } : coffee).filter((coffee) => coffee.quantity > 0))
     }
   }
 
