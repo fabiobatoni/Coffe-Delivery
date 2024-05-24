@@ -16,6 +16,7 @@ interface CardContextType {
 
   addCoffeeToCart: (coffeeDetails: CoffeeDetails ) => void
   reduceCoffeFromCart: (id: number ) => void
+  removeCoffeFromCart: (id: number ) => void
 }
 
 export const CartContext = createContext({} as CardContextType)
@@ -47,9 +48,17 @@ export function CartContextProvider({ children } : CartContextProviderProps) {
     }
   }
 
+  function removeCoffeFromCart(id: number) {
+    const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === id)
+
+    if(currentCoffeIndex >= 0) {
+      setCoffesOnCart((state) => state.filter((_, index) => index !== currentCoffeIndex))
+    }
+  }
+
 
   return(
-    <CartContext.Provider value={{ coffeesOnCart, addCoffeeToCart,reduceCoffeFromCart }}>
+    <CartContext.Provider value={{ coffeesOnCart, addCoffeeToCart,reduceCoffeFromCart, removeCoffeFromCart }}>
       {children}
     </CartContext.Provider>
   )

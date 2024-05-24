@@ -7,13 +7,11 @@ import {
   OrderContainer,
 } from './styles'
 
-function handleSubmit() {
-  alert('teste');
-}
+
 
 export function Checkout() {
   return(
-    <form onSubmit={handleSubmit}>
+    <form>
     <CheckoutContainer>
       
         <AddressAndPaymentContainer>

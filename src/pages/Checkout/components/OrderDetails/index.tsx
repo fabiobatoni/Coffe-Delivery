@@ -17,7 +17,7 @@ import { CartContext } from '../../../../context/CartContext'
 
 
 export function OrderDetails() {
-  const { addCoffeeToCart, reduceCoffeFromCart, coffeesOnCart } = useContext(CartContext)
+  const { addCoffeeToCart, reduceCoffeFromCart, removeCoffeFromCart, coffeesOnCart } = useContext(CartContext)
 
   const theme = useTheme()
 
@@ -51,7 +51,7 @@ export function OrderDetails() {
                       <Plus size={14} color={theme?.purple} />
                     </button>
                   </AddOrRemoveItem>
-                  <RemoveItem>
+                  <RemoveItem onClick={() => removeCoffeFromCart(coffee.id)}>
                     <Trash size={14} color={theme?.purple} /> remover
                   </RemoveItem>
                 </div>
