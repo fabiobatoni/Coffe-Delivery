@@ -8,8 +8,8 @@ import {
 } from './styles'
 
 import { Link } from 'react-router-dom'
-import { coffeeDetails } from '../..'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { CartContext } from '../../../../context/CartContext'
 
 export interface CoffeeDetails {
   id: number
@@ -23,34 +23,16 @@ export interface CoffeeDetails {
 
 interface CoffeeCardProps {
   coffeeDetails: CoffeeDetails
-
-  coffeesOnCart: CoffeeDetails[]
-  setCoffesOnCart: (coffee: ((state: coffeeDetails[]) => coffeeDetails[])) => void
 }
 
-export function CoffeeCard({ coffeeDetails, coffeesOnCart, setCoffesOnCart }: CoffeeCardProps) {
+export function CoffeeCard({ coffeeDetails }: CoffeeCardProps) {
   const { description, image, price, tags, title, id } = coffeeDetails
 
   const [quantity, setQuantity] = useState(0)
 
-  function addCoffeeToCart(coffeeDetails: CoffeeDetails) {
-    const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === coffeeDetails.id)
+  const { addCoffeeToCart, reduceCoffeFromCart, coffeesOnCart } = useContext(CartContext)
 
-    if(currentCoffeIndex >= 0) {
-      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffeeDetails, quantity: coffee.quantity + 1 } : coffee))
-    } else {
-      setCoffesOnCart(state => [...state, {...coffeeDetails, quantity: 1}])
-    }
-
-  }
-
-  function reduceCoffeFromCart(id: number) {
-    const currentCoffeIndex = coffeesOnCart.findIndex((coffee) => coffee.id === id)
-
-    if(currentCoffeIndex >= 0) {
-      setCoffesOnCart((state) => state.map((coffee, index) => index === currentCoffeIndex ? {...coffeeDetails, quantity: coffee.quantity - 1 } : coffee).filter((coffee) => coffee.quantity >= 0))
-    }
-  }
+  
 
   useEffect(() => {
     const currentCoffe = coffeesOnCart.find((coffee) => coffee.id === id)
