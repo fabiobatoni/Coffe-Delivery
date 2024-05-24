@@ -4,7 +4,7 @@ export const AddressContainer = styled.div`
   height: 100%;
   padding: 2.5rem;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme['base-card']};
+  background-color: ${({ theme }) => theme['background']};
   display: flex;
   flex-direction: column;
   gap: 2rem;

@@ -7,7 +7,7 @@ export const PaymentOptionsContainer = styled.div`
 
   border-radius: 6px;
 
-  background-color: ${(props) => props.theme['base-card']};
+  background-color: ${(props) => props.theme['background']};
 `
 
 export const HeadingTitle = styled.div`
