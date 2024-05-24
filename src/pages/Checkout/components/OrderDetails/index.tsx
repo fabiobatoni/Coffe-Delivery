@@ -17,9 +17,20 @@ import { CartContext } from '../../../../context/CartContext'
 
 
 export function OrderDetails() {
+  const { addCoffeeToCart, reduceCoffeFromCart, coffeesOnCart } = useContext(CartContext)
+
   const theme = useTheme()
 
-  const { addCoffeeToCart, reduceCoffeFromCart, coffeesOnCart } = useContext(CartContext)
+  const delivery = 5.5
+  const formatedDeliveryPrice = formatCurrency(delivery)
+
+  const totalItemsValue = coffeesOnCart.reduce((accumulator, currentValue) => {
+    return accumulator + (currentValue.price * currentValue.quantity) 
+  }, 0)
+
+  const formattedTotalPrice = formatCurrency(totalItemsValue)
+
+  const totalValue = formatCurrency(totalItemsValue + delivery)
 
   return (
     <OrderInfosContainer>
@@ -48,7 +59,7 @@ export function OrderDetails() {
             </div>
 
             <div className="price">
-              <p>{coffee.price}</p>
+              <p>{formatCurrency(coffee.price)}</p>
             </div>
           </CoffeeCardDetails>
 
@@ -59,15 +70,15 @@ export function OrderDetails() {
         <ValuesDetails>
           <div>
             <p className="heading">Total de itens</p>
-            <p>R$ 22,50</p>
+            <p>R$ {formattedTotalPrice} </p>
           </div>
           <div className="heading">
             <p>Entrega</p>
-            <p>R$ 0</p>
+            <p>R$ {formatedDeliveryPrice}</p>
           </div>
           <div>
             <h3>Total</h3>
-            <h3>R$ 26,00</h3>
+            <h3>R$ {totalValue}</h3>
           </div>
         </ValuesDetails>
 
@@ -75,4 +86,8 @@ export function OrderDetails() {
       </ConfirmContainer>
     </OrderInfosContainer>
   )
+}
+
+function formatCurrency(value: number) {
+  return value.toLocaleString('pt-BR', { minimumFractionDigits: 2})
 }
