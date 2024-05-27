@@ -60,7 +60,7 @@ To set up a local copy of this repository:
 
 ### 2.1 Installation
 
-Follow these steps to set up the Reav front page environment on your local
+Follow these steps to set up the Coffe-Delivery environment on your local
 machine:
 
 1. **Clone the Repository and Change Directory**
