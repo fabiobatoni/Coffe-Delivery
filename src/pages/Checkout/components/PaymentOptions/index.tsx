@@ -7,7 +7,6 @@ import {
   HeadingTitle,
   PaymentMethodsContainer,
   PaymentMethodButton,
-  ErrorTest,
 } from './styles'
 
 
