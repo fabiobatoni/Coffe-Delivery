@@ -1,3 +1,4 @@
+import { produce } from "immer"
 import { CoffeeDetails } from "../../context/CartContext"
 import { ActionTypes } from "./actions"
 
@@ -16,53 +17,58 @@ export function cartDetailsReducer(state: CoffeeDetails[], action: Action) {
   const { payload } = action
     switch(action.type) {
       case ActionTypes.ADD_COFFEE: 
-        const { coffeeDetails } = payload
+        return produce(state, (draft) => {
+          const { coffeeDetails } = payload
 
-        if(!coffeeDetails) {
-          return state
-        }
+          if(!coffeeDetails) {
+            return state
+          }
 
-        const currentCoffeIndex = state.findIndex((coffee) => coffee.id === coffeeDetails.id)
+          const currentCoffeIndex = state.findIndex((coffee) => coffee.id === coffeeDetails.id)
 
-        if(currentCoffeIndex >= 0) {
-          return state.map((coffee, index) => index === currentCoffeIndex ? {...coffeeDetails, quantity: coffee.quantity + 1 } : coffee)
-        } else {
-          return [...state, {...coffeeDetails, quantity: 1}]
-        }
+          if(currentCoffeIndex >= 0) {
+            draft[currentCoffeIndex].quantity += 1
+          } else {
+            draft.push(
+              {...coffeeDetails, quantity: 1 }
+            )
+          }
+        })
     
-      case ActionTypes.REDUCE_COFFEE: {
-        const { id } = payload
+      case ActionTypes.REDUCE_COFFEE: 
+        return produce(state, (draft) => {
+          const { id } = payload
 
-        if(!id) {
-          return state
-        }
+          if(!id) {
+            return state
+          }
 
-        const currentCoffeIndex = state.findIndex((coffee) => coffee.id === id)
+          const currentCoffeIndex = state.findIndex((coffee) => coffee.id === id)
 
-        if(currentCoffeIndex >= 0) {
-          return state.map((coffee, index) => index === currentCoffeIndex ? {...coffee, quantity: coffee.quantity - 1 } : coffee).filter((coffee) => coffee.quantity > 0)
-        }
+          if(currentCoffeIndex >= 0) {
+            draft[currentCoffeIndex].quantity -= 1
 
-        return state
-      }
+            if(draft[currentCoffeIndex].quantity <= 0) {
+              draft.splice(currentCoffeIndex, 1)
+            }
 
-      case ActionTypes.REMOVE_COFFEE: {
+          }
+        })
 
-        const { id } = payload
+      case ActionTypes.REMOVE_COFFEE: 
+          return produce(state, (draft) => {
+          const { id } = payload
 
-        if(!id) {
-          return state
-        }
+          if(!id) {
+            return state
+          }
 
-        const currentCoffeIndex = state.findIndex((coffee) => coffee.id === id)
+          const currentCoffeIndex = state.findIndex((coffee) => coffee.id === id)
 
-        if(currentCoffeIndex >= 0) {
-          return state.filter((_, index) => index !== currentCoffeIndex)
-        }
-
-        return state
-      }
-
+          if(currentCoffeIndex >= 0) {
+            draft.splice(currentCoffeIndex, 1)
+          }
+        })
 
       default:
         return state
