@@ -107,11 +107,14 @@ export const AddOrRemoveItem = styled.div`
 
   button {
     background: none;
+    border: none;
     display: flex;
     align-items: center;
   }
 `
-export const RemoveItem = styled(BaseButtonAction)``
+export const RemoveItem = styled(BaseButtonAction)`
+  border: none
+`
 
 export const ConfirmContainer = styled.div`
   width: 100%;
