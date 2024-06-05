@@ -85,7 +85,7 @@ npm install
 --version`. According to "Minimum Runtime Requirements", **TypeScript** requires
 `node` version 18.17.1 or later.
 
-To start the Reav front page, follow these steps:
+To start the Coffe-Delivery, follow these steps:
 
 1. **Run the Application**
 
