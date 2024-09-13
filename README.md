@@ -1,4 +1,4 @@
-## Front-end Coffe Delivery 
+## Front-end Coffe Delivery
 
 [![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/-Vite-purple?logo=vite&logoColor=white&style=for-the-badge)](https://vitejs.dev)
@@ -38,7 +38,7 @@ To complete this challenge, you may need to do research to learn about array man
 
 ### 1.2 Application layout
 
-For this application we provide a layout so that you can follow and implement all the features designed in figma. 
+For this application we provide a layout so that you can follow and implement all the features designed in figma.
 
 To access Figma, you must first create an account on the platform.
 
@@ -102,3 +102,8 @@ npm run dev
 Once the server is running, open your preferred web browser and navigate to:
 
 - [http://localhost:5173](http://localhost:5173)
+
+
+3. **Test the Application**
+
+- [https://coffe-delivery-pied.vercel.app/](https://coffe-delivery-pied.vercel.app/)
