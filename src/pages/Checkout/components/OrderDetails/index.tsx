@@ -1,19 +1,20 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
+import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
+import { CartContext } from '../../../../context/CartContext'
 import {
+  AddOrRemoveItem,
   CoffeeCardContainer,
   CoffeeCardDetails,
-  AddOrRemoveItem,
-  RemoveItem,
-  Divider,
-  ValuesDetails,
-  ConfirmOderButton,
-  OrderInfosContainer,
   ConfirmContainer,
+  ConfirmOderButton,
+  Divider,
+  OrderInfosContainer,
+  RemoveItem,
+  ValuesDetails,
 } from './styles'
-import { useContext } from 'react'
-import { CartContext } from '../../../../context/CartContext'
 
 
 export function OrderDetails() {
@@ -25,7 +26,7 @@ export function OrderDetails() {
   const formatedDeliveryPrice = formatCurrency(delivery)
 
   const totalItemsValue = coffeesOnCart.reduce((accumulator, currentValue) => {
-    return accumulator + (currentValue.price * currentValue.quantity) 
+    return accumulator + (currentValue.price * currentValue.quantity)
   }, 0)
 
   const formattedTotalPrice = formatCurrency(totalItemsValue)
@@ -81,8 +82,11 @@ export function OrderDetails() {
             <h3>R$ {totalValue}</h3>
           </div>
         </ValuesDetails>
-
-        <ConfirmOderButton type="submit">confirmar pedido</ConfirmOderButton>
+        <NavLink to="/Finished" title="">
+          <ConfirmOderButton>
+            Confirmar Pedido
+          </ConfirmOderButton>
+        </NavLink>
       </ConfirmContainer>
     </OrderInfosContainer>
   )
